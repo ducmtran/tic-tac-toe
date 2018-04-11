@@ -3,8 +3,8 @@ package game;
 public class Logic {
 	public static final int RUNNING = 0;
 	public static final int PLAYER_X_WON = 1;
-	public static final int PLAYER_O_WON = 2;
-	public static final int TIE = 3;
+	public static final int PLAYER_O_WON = -1;
+	public static final int TIE = 2;
 	public static final int PLAYER_X = 1;
 	public static final int PLAYER_O = 2;
 	public static final int EMPTY = 0;
@@ -17,6 +17,10 @@ public class Logic {
 	int player = PLAYER_X;
 	int turnsPlayed = 0;
 	Board b;
+
+	public Logic() {
+
+    }
 	
 	public Logic(Board b) {
 		this.b = b;
@@ -40,16 +44,24 @@ public class Logic {
 			state = gameOverCondition();
 			switchPlayer();
 			b.renderBoard(state);
+			someFunc();
 		}
 	}
-	private boolean isEmpty(int row, int column) {
+
+	private int someFunc() {
+		int a = 5;
+		int b = a +5;
+		return b;
+	}
+
+	public boolean isEmpty(int row, int column) {
 		if (board[row*3+column] == EMPTY) {
 			return true;
 		}
 		return false;
 	}
 
-	private void switchPlayer() {
+	public void switchPlayer() {
 		if (player == PLAYER_X) {
 			player = PLAYER_O;
 		} else {
@@ -57,7 +69,7 @@ public class Logic {
 		}
 	}
 	
-	private int gameOverCondition() {
+	public int gameOverCondition() {
 		if (checkPlayerWon(PLAYER_X)) {
 			return PLAYER_X_WON;
 		} else if (checkPlayerWon(PLAYER_O)) {
@@ -101,14 +113,15 @@ public class Logic {
 	}
 		
 
-	private void addToBoard(int row, int column) {
+	public void addToBoard(int row, int column) {
 		// add X or O to board array
 		board[row*3+column] = player;
 		turnsPlayed += 1;
 	}
 
-	private void resetGame() {
+	public void resetGame() {
 		this.state = RUNNING;
+		this.player = PLAYER_X;
 		for (int i=0; i<9; i++) {
 			board[i] = EMPTY;
 		}

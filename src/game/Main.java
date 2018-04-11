@@ -26,9 +26,13 @@ public class Main {
 		// Draw black grid
 		Board d = new Board();
 		Logic l = new Logic(d);
-		
-		d.renderBoard(l.getState());
-		d.logicHandler(l);
+		CompLogic c = new CompLogic(d);
+
+		d.renderBoard(c.getState());
+		d.logicHandler(c);
+
+//        d.renderBoard(l.getState());
+//        d.logicHandler(l);
 		d.setBackground(Color.BLACK);
 		
 		
